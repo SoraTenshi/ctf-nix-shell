@@ -5,7 +5,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
   outputs =
@@ -17,8 +20,8 @@
 
     flake-utils.lib.eachDefaultSystem
       (system:
-      let 
-        pkgs = nixpkgs.legacyPackages.${system}; 
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
         nixpkgs.config.allowUnfree = true;
         shell_env = (pkgs.buildFHSUserEnv {
           name = "ctf-env";
@@ -47,7 +50,7 @@
             # rev
             ghidra
           ];
-        
+
         };
       });
-  }
+}
