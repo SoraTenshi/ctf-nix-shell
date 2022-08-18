@@ -15,11 +15,9 @@
     { self
     , nixpkgs
     , flake-utils
-    , ...
+    , flake-compat
     }:
-
-    flake-utils.lib.eachDefaultSystem
-      (system:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         nixpkgs.config.allowUnfree = true;
