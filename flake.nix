@@ -3,7 +3,7 @@
   nixConfig.bash-prompt = "\[ctf\]~ ";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
