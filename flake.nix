@@ -1,6 +1,6 @@
 {
   description = "A nix-shell for my pentesting purposes";
-  nixConfig.bash-prompt = "\[\e[0;31mctf\e[0m]\]~ ";
+  
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -45,6 +45,9 @@
           # rev
           ghidra
         ];
+        shellHook = ''
+          export PS1='\e[0;35m\[[\e[0;31mctf\e[0;35m]\]@\h\e[0m~ ';
+        '';
       };
     });
 }
