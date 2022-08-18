@@ -1,6 +1,6 @@
 {
   description = "A nix-shell for my pentesting purposes";
-  nixConfig.bash-prompt = "\[ctf\]~ ";
+  nixConfig.bash-prompt-suffix = "\[ctf\] ";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -20,14 +20,13 @@
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-      nixpkgs.config.allowUnfree = true;
       shell_env = (pkgs.buildFHSUserEnv {
         name = "ctf-env";
       });
     in
-    rec {
+    {
       devShell = pkgs.mkShell {
-        inputsFrom = [ shell_env ];
+        nativeBuildInputs = [ shell_env ];
         packages = with pkgs; [
           # dependencies
           pwntools
@@ -37,8 +36,6 @@
 
           # web
           sqlmap
-          # requires unfree!
-          burpsuite
 
           # pwn
           gdb
@@ -48,7 +45,6 @@
           # rev
           ghidra
         ];
-
       };
     });
 }
