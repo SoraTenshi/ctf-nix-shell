@@ -22,6 +22,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
       shell_env = (pkgs.buildFHSUserEnv {
         name = "ctf-env";
+        profile = "PS1='\\e[0;35m\\[[\\e[0;31mctf\\e[0;35m]\\]@\\w\\n\\e[0m~ '";
         runScript = ''
           bash
         '';
@@ -44,12 +45,13 @@
           gdb
           pwndbg
           one_gadget
+          metasploit
 
           # rev
           ghidra
+          cutter
         ];
         shellHook = ''
-          export PS1='\e[0;35m\[[\e[0;31mctf\e[0;35m]\]@\w\n\e[0m~ '
           exec ctf-env
         '';
       };
