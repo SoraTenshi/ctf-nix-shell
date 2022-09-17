@@ -1,16 +1,20 @@
 {
   description = "A nix-shell for my pentesting purposes";
-  
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    responder = { 
+      url = "github:lgandx/Responder";
+      flake = false;
+    };
   };
 
   outputs =
     { self
     , nixpkgs
     , flake-utils
+    , responder
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -35,6 +39,9 @@
 
           # web
           sqlmap
+          nikto
+          thc-hydra
+          python39Packages.impacket
 
           # pwn
           gdb
