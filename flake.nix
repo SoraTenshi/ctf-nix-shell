@@ -4,6 +4,12 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+    
     responder = { 
       url = "github:lgandx/Responder";
       flake = false;
@@ -14,6 +20,7 @@
     { self
     , nixpkgs
     , flake-utils
+    , flake-compat
     , responder
     }:
     flake-utils.lib.eachDefaultSystem (system:
