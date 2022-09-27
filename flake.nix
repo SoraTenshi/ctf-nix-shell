@@ -46,6 +46,7 @@
 
           # web
           sqlmap
+          burpsuite
           nikto
           thc-hydra
           python39Packages.impacket
