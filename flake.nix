@@ -4,24 +4,12 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-    
-    responder = { 
-      url = "github:lgandx/Responder";
-      flake = false;
-    };
   };
 
   outputs =
     { self
     , nixpkgs
     , flake-utils
-    , flake-compat
-    , responder
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -40,13 +28,12 @@
         packages = with pkgs; [
           # dependencies
           pwntools
-          python310Packages.pwntools
-          python310Full
-          python-language-server
+          python311Packages.pwntools
+          python311Packages.python-lsp-server
+          python311Full
 
           # web
           sqlmap
-          burpsuite
           nikto
           thc-hydra
           python39Packages.impacket
