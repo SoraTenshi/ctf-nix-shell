@@ -14,18 +14,10 @@
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-      shell_env = (pkgs.buildFHSUserEnv {
+      shell_env = (pkgs.buildFHSEnv {
         name = "ctf-env";
         profile = "PS1='\\e[0;35m\\[[\\e[0;31mctf\\e[0;35m]\\]@\\w\\n\\e[0m~ '";
-        runScript = ''
-          bash
-        '';
-      });
-    in
-    {
-      devShell = pkgs.mkShell {
-        nativeBuildInputs = [ shell_env ];
-        packages = with pkgs; [
+        targetPkgs = pkgs: with pkgs; [
           # dependencies
           pwntools
           python311Packages.pwntools
@@ -35,25 +27,25 @@
           # web
           sqlmap
           nikto
-          thc-hydra
-          python39Packages.impacket
+          # thc-hydra
+          # python39Packages.impacket
 
           # pwn
-          gdb
-          pwndbg
+          # gdb
+          # pwndbg
           one_gadget
           metasploit
 
           # rev
-          ghidra
-          cutter
+          # ghidra
+          # cutter
           
           # misc
           unzip
         ];
-        shellHook = ''
-          exec ctf-env
-        '';
-      };
+      }).env;
+    in
+    {
+      devShells.default = shell_env;
     });
 }
