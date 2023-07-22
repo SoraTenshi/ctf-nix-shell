@@ -13,8 +13,12 @@
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
-      pkgs = nixpkgs.legacyPackages.${system};
-      shell_env = (pkgs.buildFHSEnv {
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        config.allowUnsupportedSystem = true;
+      };
+      ctf = pkgs.buildFHSEnv {
         name = "ctf-env";
         profile = "PS1='\\e[0;35m\\[[\\e[0;31mctf\\e[0;35m]\\]@\\w\\n\\e[0m~ '";
         targetPkgs = pkgs: with pkgs; [
@@ -43,9 +47,9 @@
           # misc
           unzip
         ];
-      }).env;
+      };
     in
     {
-      devShells.default = shell_env;
+      devShells.default = ctf.env;
     });
 }
