@@ -20,23 +20,28 @@
       };
       ctf = pkgs.buildFHSEnv {
         name = "ctf-env";
-        profile = "PS1='\\e[0;35m\\[[\\e[0;31mctf\\e[0;35m]\\]@\\w\\n\\e[0m~ '";
-        targetPkgs = pkgs: with pkgs; [
+        targetPkgs = pkgs: let
+          pythonStuff = pkgs.python311Full.withPackages (pp: [
+            pp.pwntools
+            pp.pycryptodome
+          ]);
+        in with pkgs; [
           # dependencies
-          pwntools
-          python311Packages.pwntools
+          pythonStuff
           python311Packages.python-lsp-server
-          python311Full
+          python311Packages.pip
+          pwntools
 
           # web
           sqlmap
           nikto
-          # thc-hydra
+          wget
+          thc-hydra
           # python39Packages.impacket
 
           # pwn
-          # gdb
-          # pwndbg
+          gdb
+          pwndbg
           one_gadget
           metasploit
 
@@ -46,7 +51,9 @@
           
           # misc
           unzip
+          gcc
         ];
+        runScript = "zsh";
       };
     in
     {
