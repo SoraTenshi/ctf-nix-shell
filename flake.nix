@@ -53,7 +53,6 @@
           unzip
           gcc
         ];
-        runScript = "zsh";
       };
     in
     {
