@@ -1,8 +1,9 @@
-*
-!flake.nix
-!flake.lock
-!.direnv
-!.envrc
-!.gitignore
-!LICENSE
-!README.md
+*/
+.gdb_history
+
+!.direnv/
+!.direnv/*
+!.direnv/**/*
+!.github/
+!.github/*
+!.github/**/*
