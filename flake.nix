@@ -18,25 +18,25 @@
         config.allowUnfree = true;
         config.allowUnsupportedSystem = true;
       };
-      ctf = pkgs.buildFHSEnv {
+      ctf = pkgs.mkShell {
         name = "ctf-env";
-        targetPkgs = pkgs: let
-          pythonStuff = pkgs.python311Full.withPackages (pp: [
+        buildInputs = let
+          pythonStuff = pkgs.python311.withPackages (pp: [
             pp.pwntools
             pp.pycryptodome
+            pp.python-lsp-server
           ]);
         in with pkgs; [
           # dependencies
           pythonStuff
-          python311Packages.python-lsp-server
-          python311Packages.pip
-          pwntools
 
           # web
           sqlmap
           nikto
           wget
           thc-hydra
+          nmap
+          masscan
           # python39Packages.impacket
 
           # pwn
@@ -44,6 +44,7 @@
           pwndbg
           one_gadget
           metasploit
+          exploitdb
 
           # rev
           # ghidra
@@ -51,12 +52,13 @@
           
           # misc
           unzip
+          unrar
           gcc
+
         ];
-        runScript = "zsh";
       };
     in
     {
-      devShells.default = ctf.env;
+      devShells.default = ctf;
     });
 }
