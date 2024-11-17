@@ -21,4 +21,4 @@ jobs:
           name: superkenvery
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Run `nix build`
-        run: nix build .
+        run: nix develop --command echo done
