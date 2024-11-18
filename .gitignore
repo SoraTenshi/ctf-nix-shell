@@ -1,0 +1,6 @@
+*/
+.gdb_history
+
+!.github/
+!.github/*
+!.github/**/*
