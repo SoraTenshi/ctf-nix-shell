@@ -45,6 +45,7 @@
           one_gadget
           metasploit
           exploitdb
+          pwninit
 
           # rev
           # ghidra
@@ -56,6 +57,9 @@
           gcc
 
         ];
+        shellHook = ''
+          alias pwninit='pwninit --template-path ${self}/templates/template.py'
+        '';
       };
     in
     {
