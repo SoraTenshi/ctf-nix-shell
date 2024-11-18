@@ -18,7 +18,7 @@ jobs:
       - uses: cachix/cachix-action@v14
         with:
           # https://nix.dev/guides/recipes/continuous-integration-github-actions
-          name: superkenvery
+          name: soratenshi
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Run `nix build`
         run: nix develop --command echo done
