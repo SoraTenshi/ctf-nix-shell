@@ -21,7 +21,7 @@
       ctf = pkgs.mkShell {
         name = "ctf-env";
         buildInputs = let
-          pythonStuff = pkgs.python311.withPackages (pp: [
+          pythonStuff = pkgs.python312.withPackages (pp: [
             pp.pwntools
             pp.pycryptodome
             pp.python-lsp-server

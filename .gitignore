@@ -1,9 +1,6 @@
 */
 .gdb_history
 
-!.direnv/
-!.direnv/*
-!.direnv/**/*
 !.github/
 !.github/*
 !.github/**/*
